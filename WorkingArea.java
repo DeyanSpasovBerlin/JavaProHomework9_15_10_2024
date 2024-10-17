@@ -42,10 +42,13 @@ public class WorkingArea {
     }
 
     public ArrayList<Integer> getEvenMember(ArrayList<Integer> arr) {
+        ArrayList <Integer> arrtClone = (ArrayList<Integer>) arr.clone();
         ArrayList<Integer> evenMembers = new ArrayList<Integer>();
-        for (Integer i : arr) {
-            if ((i % 2) != 0) {
-                evenMembers.add(i);
+        Iterator<Integer> itInteger = arrtClone.iterator();
+        while (itInteger.hasNext()) {
+            Integer num = itInteger.next();
+            if ((num % 2) != 0){
+                evenMembers.add(num);
             }
         }
         System.out.println("Now we pick up the even members:");
@@ -54,8 +57,9 @@ public class WorkingArea {
     }
 
     public Integer getArraySum(ArrayList<Integer> arr) {
+        ArrayList <Integer> arrtClone = (ArrayList<Integer>) arr.clone();
         Integer bufer = 0;
-        Iterator<Integer> itInteger = arr.iterator();
+        Iterator<Integer> itInteger = arrtClone.iterator();
         while (itInteger.hasNext()) {
             Integer num = itInteger.next();
             bufer += num;
@@ -66,10 +70,11 @@ public class WorkingArea {
     }
 
     public Integer getMaxArr(ArrayList<Integer> arr) {
+        ArrayList <Integer> arrtClone = (ArrayList<Integer>) arr.clone();
         System.out.println("Now we pick up the max members:");
         Integer bufer = arr.get(0);
         arr.remove(0);
-        Iterator<Integer> itInteger = arr.iterator();
+        Iterator<Integer> itInteger = arrtClone.iterator();
         while (itInteger.hasNext()) {
             Integer num = itInteger.next();
             if (bufer > num) {
@@ -83,24 +88,22 @@ public class WorkingArea {
     }
         public ArrayList<String> splitText (String text){
             String[] splitTextArr;
-            ArrayList<String> splitTextArrList = new ArrayList<>();
             System.out.println("Now we split text in String Array:");
-            String spliter = "[,\\.\\s\\?]";
+            String spliter = "[,. ?]+";
             splitTextArr = text.split(spliter);
-            for (int i = 0; i < splitTextArr.length; i++) {
-                splitTextArrList.add(splitTextArr[i]);
-            }
+            ArrayList<String> splitTextArrList = new ArrayList<>(Arrays.asList(text.split(spliter)));
             System.out.println(splitTextArrList);
             return splitTextArrList;
         }
         public ArrayList<String> removeRepead (ArrayList <String> text) {
+            ArrayList <String> textClone = (ArrayList<String>) text.clone();
             ArrayList<String> nonRepeadArr = new ArrayList<String>();
             boolean flag = false;
-            Iterator<String> itString = text.iterator();
+            Iterator<String> itString = textClone.iterator();
             while (itString.hasNext()) {
                 String s = itString.next();
                 itString.remove();
-                if (!text.contains(s)) {
+                if (!textClone.contains(s)) {
                     nonRepeadArr.add(s);
                 }
             }
@@ -109,9 +112,10 @@ public class WorkingArea {
             return nonRepeadArr;
         }
         public String concatArrayString (ArrayList<String> text) {
+            ArrayList <String> textClone = (ArrayList<String>) text.clone();
             ArrayList<String> nonRepeadArr = new ArrayList<String>();
             String concatString = "";
-            Iterator<String> itString = text.iterator();
+            Iterator<String> itString = textClone.iterator();
             while (itString.hasNext()) {
                 String s = itString.next();
                 concatString = concatString.concat(s);
@@ -122,38 +126,40 @@ public class WorkingArea {
         }
 
     public Integer getLangArr(ArrayList<String> arr) {
-        System.out.println("We have the next input srting Array:");
-        System.out.println(arr);
+        ArrayList <String> arrtClone = (ArrayList<String>) arr.clone();
         System.out.println("Now we pick up the longest members:");
-        int bufer = arr.getFirst().length();
-        arr.remove(0);
-        Iterator<String> itString = arr.iterator();
+        int bufer = arrtClone.getFirst().length();
+        String maxWord = "";
+        arrtClone.remove(0);
+        Iterator<String> itString = arrtClone.iterator();
         while (itString.hasNext()) {
             String s = itString.next();
             if (bufer > s.length()) {
                 itString.remove();
             }else {
                 bufer = s.length();
+                maxWord = s;
             }
         }
-        System.out.println("The langest member is long: "+bufer);
+        System.out.println("The langest member is long: "+bufer+" and is: "+maxWord);
         return bufer;
     }
 
     public ArrayList<String> unitedTwoArr (ArrayList <String> str1,ArrayList <String> str2) {
-        //ArrayList<String> unitedArr = new ArrayList<>();
+        ArrayList <String> str1tClone = (ArrayList<String>) str1.clone();
+        ArrayList <String> str2tClone = (ArrayList<String>) str2.clone();
         System.out.println("We have the next two string Arrays:");
-        System.out.println(str1);
-        System.out.println(str2);
+        System.out.println(str1tClone);
+        System.out.println(str2tClone);
         System.out.println("Now we will united them.");
-        Iterator<String> itString = str2.iterator();
+        Iterator<String> itString = str2tClone.iterator();
         while (itString.hasNext()) {
             String s = itString.next();
-            str1.add(s);
+            str1tClone.add(s);
         }
         System.out.println("The united string Array is:");
-        System.out.println(str1);
-        return str1;
+        System.out.println(str1tClone);
+        return str1tClone;
     }
 
 }
